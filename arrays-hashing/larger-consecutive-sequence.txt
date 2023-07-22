@@ -1,0 +1,37 @@
+class Solution {
+    public int longestConsecutive(int[] nums) {
+
+        if (nums.length == 0) {
+            return 0;
+        }
+
+        if (nums.length == 1) {
+            return 1;
+        }
+
+        Arrays.sort(nums);
+        int pointerOne = 0;
+        int pointerTwo = 1;
+        int currLength = 1;
+        int maxLength = 0;
+        int sequence = nums[pointerTwo] - nums[pointerOne];
+
+        while (pointerTwo < nums.length) {
+            System.out.println(nums[pointerOne]);
+            int currSequence = nums[pointerTwo] - nums[pointerOne];
+            if (sequence != 0 && sequence == currSequence) {
+                currLength++;
+            } 
+            
+            if (sequence != currSequence || pointerTwo == nums.length - 1) {
+                sequence = currSequence;
+                maxLength = Math.max(maxLength, currLength);
+                currLength = 2;
+            }
+            pointerOne++;
+            pointerTwo++;
+        }
+
+        return maxLength;
+    }
+}
